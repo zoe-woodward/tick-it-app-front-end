@@ -11,9 +11,15 @@ const TaskList = (props) => {
         ) : (
         <ul>
           {props.tasks.map((task) => (
-            <li key={task._id}>{task.name}</li>
-          ))}
-        </ul>
+            <li 
+            key={task._id}
+            style= {{ cursor: 'pointer' }}  
+            onClick={() => props.handleSelect(task)}
+          >
+            {task.name}
+          </li>
+        ))}
+      </ul>
         )}
       </div>
     </div>
