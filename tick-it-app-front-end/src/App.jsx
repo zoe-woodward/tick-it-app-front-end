@@ -5,11 +5,13 @@ import * as taskService from './services/taskService';
 
 import TaskList from './components/TaskList/TaskList';
 import TaskDetail from './components/TaskDetail/TaskDetail';
+import TaskForm from './components/TaskForm/TaskForm';
 
 const App = () => {
 
   const [tasks, setTasks] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
 
   useEffect(() => {
@@ -33,13 +35,27 @@ const App = () => {
     } else {
       setSelected(task);
     }
+    setIsFormOpen(false);
+  };
+
+  const handleFormView = () => {
+    setIsFormOpen(!isFormOpen);
   };
 
 
   return (
     <>
-      <TaskList tasks={tasks} handleSelect={handleSelect} />
+      <TaskList
+      tasks={tasks}
+      handleSelect={handleSelect} 
+      handleFormView={handleFormView}
+      isFormOpen={isFormOpen}
+      />
+      {isFormOpen ? (
+      <TaskForm />
+      ) : (
       <TaskDetail selected={selected} handleSelect={handleSelect} />
+      )}
     </>
   );
 };

@@ -22,6 +22,9 @@ const TaskList = (props) => {
       </ul>
         )}
       </div>
+      <button onClick={props.handleFormView}>
+        {props.isFormOpen ? 'Close Form' : 'New Task'}
+      </button>
     </div>
   );
 };
