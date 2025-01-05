@@ -3,9 +3,9 @@
 const TaskList = (props) => {
 
   return (
-    <div>
+    <div className="sidebar-container">
       <h1>Task List</h1>
-      <div>
+      <div className="list-container">
       {!props.tasks.length ? (
           <h2>No Tasks Yet!</h2>
         ) : (

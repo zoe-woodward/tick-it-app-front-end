@@ -1,20 +1,47 @@
+import { useState, useEffect } from 'react';
 
-import { useState } from 'react';
-
-const TaskForm = () => {
-  const [formData, setFormData] = useState({
+const TaskForm = (props) => {
+  const initialState = {
     name: '',
     dueDate: '',
     category: '',
-  });
+  };
+
+  const [formData, setFormData] = useState(initialState);
+
+  
+  useEffect(() => {
+    if (props.selected) {
+      setFormData({
+        name: props.selected.name || '',
+        dueDate: props.selected.dueDate || '',
+        category: props.selected.category || '',
+      });
+    } else {
+      setFormData(initialState);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.selected]);
+
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+  
+    if (props.selected && props.selected._id) {
+      props.handleUpdateTask(formData, props.selected._id);
+    } else {
+      props.handleAddTask(formData);
+    }
+  };
+  
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
   return (
-    <div>
-      <form>
+    <div className="form-container">
+      <form onSubmit={handleSubmit}>
         <label htmlFor="name"> Name </label>
         <input
           id="name"
@@ -38,7 +65,9 @@ const TaskForm = () => {
           value={formData.category}
           onChange={handleChange}
         />
-        <button type="submit">Add New Task</button>
+        <button type="submit">
+          {props.selected ? 'Update Task' : 'Add New Task' }
+        </button>
       </form>
     </div>
   );

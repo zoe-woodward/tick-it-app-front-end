@@ -1,6 +1,7 @@
 
 
 import { useState, useEffect } from 'react';
+import './App.css';
 import * as taskService from './services/taskService';
 
 import TaskList from './components/TaskList/TaskList';
@@ -38,8 +39,62 @@ const App = () => {
     setIsFormOpen(false);
   };
 
-  const handleFormView = () => {
+  const handleFormView = (task) => {
     setIsFormOpen(!isFormOpen);
+    if (task) {
+      setSelected(task);
+    } else {
+      setSelected(null);
+    }
+  };
+  
+
+  const handleAddTask = async (formData) => {
+    try {
+      const newTask = await taskService.create(formData);
+      if (newTask.err) {
+        throw new Error(newTask.err);
+      }
+      setTasks([newTask, ...tasks]);
+      setIsFormOpen(false);  
+      setSelected(null);      
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+
+  const handleUpdateTask = async (formData, taskId) => {
+    try {
+      const updatedTask = await taskService.update(formData, taskId);
+      if (updatedTask.err) {
+        throw new Error(updatedTask.err);
+      }
+      const updatedTaskList = tasks.map((task) => (
+        task._id !== updatedTask._id ? task : updatedTask
+      ));
+      setTasks(updatedTaskList);
+      setSelected(updatedTask); 
+      setIsFormOpen(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleDeleteTask = async (taskId) => {
+    try {
+      const deletedTask = await taskService.deleteTask(taskId);
+      if (deletedTask.err) {
+        throw new Error(deletedTask.err);
+      }
+      const fetchedTasks = await taskService.index(); 
+      setTasks(fetchedTasks);  
+      setSelected(null);       
+      setIsFormOpen(false);  
+    } catch (err) {
+      console.log(err);
+    }
   };
 
 
@@ -52,12 +107,21 @@ const App = () => {
       isFormOpen={isFormOpen}
       />
       {isFormOpen ? (
-      <TaskForm />
+      <TaskForm  
+      handleAddTask={handleAddTask} 
+      selected={selected} 
+      handleUpdateTask={handleUpdateTask}/>
       ) : (
-      <TaskDetail selected={selected} handleSelect={handleSelect} />
+      <TaskDetail 
+      selected={selected} 
+      handleFormView={handleFormView}
+      handleSelect={handleSelect} 
+      handleDeleteTask={handleDeleteTask} />
       )}
     </>
   );
 };
+
+
 
 export default App;
