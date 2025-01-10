@@ -1,4 +1,4 @@
-const BASE_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/tasks`;
+const BASE_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/tasks`
 
 
 const index = async () => {
@@ -24,28 +24,31 @@ const show = async (taskId) => {
 };
 
 
-
-const create = async (userId, formData) => {
+const create = async (formData) => {
   try {
-    const res = await fetch(`${BASE_URL}/${userId}`, {
+    const res = await fetch(BASE_URL, {
       method: 'POST',
       headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
-    });
+      });
     return res.json();
   } catch (err) {
     console.log(err);
   }
 };
 
-const update = async (formData, taskId) => {
+
+const update = async (taskId, formData) => {
   try {
     const res = await fetch(`${BASE_URL}/${taskId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        
       },
       body: JSON.stringify(formData),
     });
@@ -60,6 +63,9 @@ const deleteTask = async (taskId) => {
   try {
     const res = await fetch(`${BASE_URL}/${taskId}`, {
       method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     });
     return res.json();
   } catch (err) {
@@ -70,6 +76,7 @@ const deleteTask = async (taskId) => {
   
   export {
     index,
+    show,
     create,
     update,
     deleteTask,

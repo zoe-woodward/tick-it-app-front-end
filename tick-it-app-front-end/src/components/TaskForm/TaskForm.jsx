@@ -1,50 +1,65 @@
 import { useState, useEffect } from 'react';
+import * as taskService from '../../services/taskService';
+
+import { useParams } from 'react-router-dom';
+
+
 
 const TaskForm = (props) => {
-  const initialState = {
+
+  const [formData, setFormData] = useState({
     name: '',
     dueDate: '',
     category: '',
-  };
-
-  const [formData, setFormData] = useState(initialState);
-
-  
-  useEffect(() => {
-    if (props.selected) {
-      setFormData({
-        name: props.selected.name || '',
-        dueDate: props.selected.dueDate || '',
-        category: props.selected.category || '',
-      });
-    } else {
-      setFormData(initialState);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.selected]);
+  });
 
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-  
-    if (props.selected && props.selected._id) {
-      props.handleUpdateTask(formData, props.selected._id);
-    } else {
-      props.handleAddTask(formData);
-    }
-  };
-  
+const { taskId } = useParams();
+
+
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    if (taskId) {
+      props.handleUpdateTask(taskId, formData);
+    } else {
+      props.handleAddTask(formData);
+    }
+  };
+
+  useEffect(() => {
+    const fetchTask = async () => {
+      if (taskId) {
+        const taskData = await taskService.show(taskId);
+        const formattedDate = taskData.dueDate ? taskData.dueDate.split('T')[0] : ''; 
+
+        setFormData({
+          name: taskData.name || '', 
+          dueDate: formattedDate, 
+          category: taskData.category || '',  
+        });
+      }
+    };
+
+    fetchTask();  
+  }, [taskId]);  
+  
+
+
   return (
+    
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+        <h1>{taskId ? 'Edit Task' : 'New Task'}</h1>
         <label htmlFor="name"> Name </label>
         <input
-          id="name"
+          id="name-input"
+          type="text"
           name="name"
           value={formData.name}
           onChange={handleChange}
@@ -52,25 +67,31 @@ const TaskForm = (props) => {
         />
         <label htmlFor="dueDate"> Due by </label>
         <input
-          id="dueDate"
+          id="dueDate-input"
           name="dueDate"
+          type='date'
           value={formData.dueDate}
           onChange={handleChange}
           required
         />
-        <label htmlFor="category"> Category </label>
-        <input
-          id="category"
+       <label htmlFor="category">Category</label>
+       <select
+          required
           name="category"
+          id="category-input"
           value={formData.category}
           onChange={handleChange}
-        />
-        <button type="submit">
-          {props.selected ? 'Update Task' : 'Add New Task' }
-        </button>
+        >
+          <option value="">Select a category</option>
+          <option value="Work">Work</option>
+          <option value="Personal">Personal</option>
+          <option value="Study">Study</option>
+        </select>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
 };
 
 export default TaskForm;
+
