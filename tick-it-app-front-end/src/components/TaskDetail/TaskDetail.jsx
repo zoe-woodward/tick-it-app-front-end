@@ -17,6 +17,17 @@ const TaskDetail = (props) => {
   }, [taskId]);
 
   if (!task) return <main>Loading...</main>;
+  
+
+  const handleMarkAsCompleted = async () => {
+    try {
+      const updatedTask = await taskService.updateCompletionStatus(task._id, true);
+      setTask(updatedTask); 
+    } catch (error) {
+      console.error('Error updating task:', error);
+    }
+  };
+
 
   return (
     <main>
@@ -32,7 +43,7 @@ const TaskDetail = (props) => {
       <p>Category: {task.category}</p>
 
       <div className="button-container">
-      <button>
+      <button onClick={handleMarkAsCompleted}>
           I've done this!
         </button>
         

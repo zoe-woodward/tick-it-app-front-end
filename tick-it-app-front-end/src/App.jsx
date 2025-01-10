@@ -50,9 +50,7 @@ const App = () => {
 
 const handleUpdateTask = async (taskId, formData) => {
   const updatedTask = await taskService.update(taskId, formData);
-
   setTasks(tasks.map((task) => (taskId === task._id ? updatedTask : task)));
-
   navigate(`/${taskId}`);
 };
 
