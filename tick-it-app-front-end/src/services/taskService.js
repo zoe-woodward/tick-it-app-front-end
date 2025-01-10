@@ -58,22 +58,6 @@ const update = async (taskId, formData) => {
   }
 };
 
-const updateCompletionStatus = async (taskId, isCompleted) => {
-  try {
-    const res = await fetch(`${BASE_URL}/${taskId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      },
-      body: JSON.stringify({ isCompleted }),
-    });
-  
-    return res.json(); 
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 
 
@@ -98,6 +82,5 @@ const deleteTask = async (taskId) => {
     create,
     update,
     deleteTask,
-    updateCompletionStatus,
   };
 

@@ -58,7 +58,7 @@ const { taskId } = useParams();
         <h1>{taskId ? 'Edit Task' : 'New Task'}</h1>
         <label htmlFor="name"> Name </label>
         <input
-          id="name-input"
+          id="name"
           type="text"
           name="name"
           value={formData.name}
@@ -67,7 +67,7 @@ const { taskId } = useParams();
         />
         <label htmlFor="dueDate"> Due by </label>
         <input
-          id="dueDate-input"
+          id="dueDate"
           name="dueDate"
           type='date'
           value={formData.dueDate}
@@ -78,7 +78,7 @@ const { taskId } = useParams();
        <select
           required
           name="category"
-          id="category-input"
+          id="category"
           value={formData.category}
           onChange={handleChange}
         >

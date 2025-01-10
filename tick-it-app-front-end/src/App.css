@@ -1,87 +1,214 @@
-#root {
-  min-height: 100vh;
-  width: 100%;
-  display: grid;
-  grid-template-columns: fit-content(375px) 1fr;
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }
 
-.sidebar-container {
-  padding: 2rem;
+main {
+  padding: 20px;
+  margin: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px; 
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgb(38, 147, 147);
-  min-width: 0;
+  align-items: center; 
+  border: 2px solid #4CAF50; 
+  box-shadow: 0 0 10px rgba(0, 128, 0, 0.2);
 }
 
-.list-container {
+/* Landing Page */
+.landing {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.landing h1 {
+  font-size: 3rem;
+  color: rgb(65, 218, 136); 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  
+  font-family: 'Arial', sans-serif; 
+}
+
+.landing h2 {
+  font-size: 1.5rem;
+  color: #38b46f;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Navigation Bar */
+.nav-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 30px;
   display: flex;
-  justify-content: flex-start;
-  overflow-y: overlay;
-  max-height: 700px;
-  scrollbar-color: #be545440 #00000000;
-  width: 100%;
+  gap: 30px; /* Increased gap between navigation items */
 }
 
-ul {
-  padding-left: 0;
-  max-width: 300px;
-  display: inline-block;
-  list-style-type: disc;
-}
-
-li {
-  font-size: 2rem;
-  white-space: wrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  margin-bottom: 1.2rem;
-  cursor: pointer;
+.nav-list li {
+  font-size: 1.2rem; 
   transition: font-weight 0.3s ease; 
 }
 
-li:hover {
+.nav-list li:hover {
   font-weight: bold; 
 }
 
-.details-container {
-  padding: 2rem;
+/* Task List Styling */
+.task-list {
+  background-color: #f9e6f0;
+  margin: 12px 0;
+  padding: 15px;
+  border-radius: 6px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: rgb(174, 231, 244);
+  transition: background-color 0.3s ease-in-out;
+}
+
+article {
+  color: #f50606;
+  transition: background-color 0.3s ease;
+}
+
+article.completed {
+  background-color: #4CAF50 !important; 
+  color: white;
+  border-style: dashed;
+  border-color: #4CAF50;
+  border-width: 2px;
+  padding: 10px;
+}
+
+
+button {
+  padding: 10px 20px;
+  background-color: rgb(65, 218, 136); 
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 200px;
+  font-family: 'Arial', sans-serif;
+}
+
+button:hover {
+  background-color: #42c61d;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+.button-container {
+  display: flex;
+  flex-direction: column; 
+  gap: 15px; 
+}
+
+
+.mark-completed {
+  background-color: #4CAF50; 
+  color: white;
+}
+
+.mark-completed:hover {
+  background-color: #45a049; 
+}
+
+.delete-task {
+  background-color: #f44336; 
+  color: white; 
+}
+
+.delete-task:hover {
+  background-color: #e53935; 
 }
 
 .form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  max-width: 600px;
+  width: 100%;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 15px;
+  width: 100%;
 }
 
 label {
-  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-input {
-  height: 2rem;
-  width: 12rem;
-  margin-bottom: 1rem;
+input, select {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
 }
 
-button {
-  width: 200px;
-  margin: 1rem;
+input[type="date"] {
+  font-size: 1rem;
 }
 
-.button-container {
-  padding: 2rem;
-  outline: 0;
+select {
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+form div {
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 10px;
+    height: auto; 
+    align-items: flex-start; 
+  }
+
+  main {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .task-list article {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .form-container {
+    max-width: 100%;
+  }
+
+  form {
+    gap: 10px;
+  }
+
+  .task-detail .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
 }

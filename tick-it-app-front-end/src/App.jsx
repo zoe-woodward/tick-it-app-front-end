@@ -11,6 +11,7 @@ import Landing from './components/Landing/Landing';
 import SignupForm from './components/SignupForm/SignupForm'
 import SigninForm from './components/SigninForm/SigninForm';
 
+
 export const AuthedUserContext = createContext(null);
 
 const App = () => {
@@ -42,7 +43,6 @@ const App = () => {
 
   const handleDeleteTask = async (taskId) => {
     const deletedTask = await taskService.deleteTask(taskId);
-    console.log('taskId', taskId);
     setTasks(tasks.filter((task) => task._id !== deletedTask._id));
   navigate('/');
 };

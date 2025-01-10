@@ -5,10 +5,11 @@ const NavBar = ({ user, handleSignout }) => {
     <>
       { user ? (
         <nav>
-          <ul>
+          <ul className="nav-list">
             <li><Link to="/">Home</Link></li>
             <li><Link to="" onClick={handleSignout}>Sign Out</Link></li>
           </ul>
+          
         </nav>
       ) : (
         <nav>
