@@ -40,7 +40,7 @@ const TaskDetail = (props) => {
         {task.isCompleted ? 'Completed - well done!' : 'Not Completed - you can do it!'}
       </h2>
       
-      <p>Category: {task.category}</p>
+      <p>Category: {task.category.category}</p>
 
       <div className="button-container">
       <button className="mark-completed" onClick={handleMarkAsCompleted}>
