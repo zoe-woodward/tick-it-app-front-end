@@ -59,7 +59,7 @@ Allow users to create tasks that repeat on a daily, weekly, or monthly basis.
 Provide users with the ability to sort and filter tasks by priority, due date, or category.
 
 * **Analytics & Insights:**
-TShow users stats such as completion rate, overdue tasks, most active days, etc., to help them analyse productivity.
+Show users stats such as completion rate, overdue tasks, most active days, etc., to help them analyse productivity.
 Send users reports on their task completion and performance over time.
 
 
