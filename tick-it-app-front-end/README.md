@@ -1,7 +1,7 @@
-# Tickit: A Task Management App
-## Tickit is a task management web application built with React on the front-end, Node.js and Express on the back-end, and MongoDB for data storage. This full-stack application allows users to sign up, sign in, and manage their tasks with full CRUD functionality. The app uses JWT tokens for user authentication and authorization, ensuring that only signed-in users can perform actions like creating, updating, or deleting tasks.
+# TickIt: A Task Management App
+## TickIt is a task management web application built with React on the front-end, Node.js and Express on the back-end, and MongoDB for data storage. This full-stack application allows users to sign up, sign in, and manage their tasks with full CRUD functionality. The app uses JWT tokens for user authentication and authorization, ensuring that only signed-in users can perform actions like creating, updating, or deleting tasks.
 
-![TickIt Home Page] (public/assets/TickIt-preview.png)
+![TickIt Home Page](public/assets/TickIt-preview.png)
 
 Life can get busy and without keeping track of tasks it can be easy to get overwhelmed, miss deadlines and generally add additional uneccesary stress to our lives. TickIt uses visual feedback to encourage users to get their tasks done and provides a user-friendly interface for adding new things that come along. From shopping lists to bucket lists it can provide that added bit of motivation to get things done sooner rather than later!
 
@@ -18,8 +18,6 @@ Life can get busy and without keeping track of tasks it can be easy to get overw
 
 <br />
 
-
-
 **Technologies Used:**
 
 **Front-End:**
@@ -35,9 +33,7 @@ Life can get busy and without keeping track of tasks it can be easy to get overw
 **Authentication:**
 * JWT (JSON Web Tokens): For securely authenticating users and managing session state.
 
-
 <br />
-
 
 [**Access TickIt here**]()
 
@@ -45,11 +41,10 @@ Life can get busy and without keeping track of tasks it can be easy to get overw
 [The back-end repository can be found here](https://github.com/zoe-woodward/tick-it-app-back-end.git)
 
 <br />
-**Planning materials**:
+**Planning materials:**
 [Find the initial plan here](https://trello.com/b/aqqM3gap/tick-it)
 
 <br />
-
 
 **Future Developments**
 
@@ -64,7 +59,7 @@ Allow users to create tasks that repeat on a daily, weekly, or monthly basis.
 Provide users with the ability to sort and filter tasks by priority, due date, or category.
 
 * **Analytics & Insights:**
-TShow users stats such as completion rate, overdue tasks, most active days, etc., to help them analyse productivity.
+Show users stats such as completion rate, overdue tasks, most active days, etc., to help them analyse productivity.
 Send users reports on their task completion and performance over time.
 
 
